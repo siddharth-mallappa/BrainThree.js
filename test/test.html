@@ -10,6 +10,7 @@
 </html>
 
 <script>
+geometry = new THREE.Geometry();
 glitch=0
 theta=0
 target_vertex=[
@@ -19,7 +20,7 @@ target_vertex=[
   [[-106,28,0],[-209,-39,0],[-95,-38,0]],
   [[-247,64,0],[-184,27,0],[-257,-20,0]],
   [[28,65,0],[22,-56,0],[-87,-38,0]],
-  [[-87,-38,0],[28,65,0],[-100,-31,0]],
+  [[-87,-38,0],[28,65,0],[-100,31,0]],
   [[57,215,0],[4,178,0],[-59,197,0]],
   [[71,214,0],[9,172,0],[34,77,0]],
   [[34,77,0],[91,133,0],[71,214,0]],
@@ -30,18 +31,15 @@ target_vertex=[
   [[260,-11,0],[164,68,0],[130,-29,0]],
   [[176,67,0],[274,56,0],[267,-6,0]],
   [[133,-37,0],[223,-71,0],[259,-20,0]],
-  [[38,73,0],[107,44,0],[157,73,0],[97,128,0]],
+  [[38,73,0],[107,44,0],[157,73,0]],
   [[97,128,0],[38,73,0],[157,73,0]],
   [[162,77,0],[210,152,0],[106,129,0]],
   [[218,149,0],[171,75,0],[267,63,0]],
-
   [[17,70,0],[-95,42,0],[-73,111,0]],
   [[27,75,0],[1,172,0],[-75,193,0]],
   [[-72,119,0],[27,75,0],[-75,193,0]],
   [[-107,38,0],[-83,112,0],[-200,86,0]],
   [[-85,190,0],[-82,120,0],[-192,97,0]]
-  // [[-85,190,0],[-83,120,0],[-192,97,0]],
-
 ]
     triangleslist=[]
     let scene, camera, renderer;
@@ -51,165 +49,54 @@ target_vertex=[
       return Math.floor(Math.random() * Math.floor(max));
     }
 
+    function singlepoint(){
+       for(i=0;i<79;i++){
+       geometry.vertices.push( new THREE.Vector3(0,0,0));
+       }
+    }
+
+    function twopoint(){
+      for(i=0;i<26;i++){
+        for(j=0;j<3;j++){
+
+            if(j==0){
+            geometry.vertices.push( new THREE.Vector3(0,0,0));;
+            }
+            else{
+              geometry.vertices.push( new THREE.Vector3(target_vertex[i][j][0],target_vertex[i][j][1],target_vertex[i][j][2]));
+            }
+          }
+        }
+    }
+
+    function line(){
+      for(i=0;i<26;i++){
+        for(j=0;j<3;j++){
+
+            if(j==0 || j==1){
+            geometry.vertices.push( new THREE.Vector3(0,0,0));;
+            }
+            else{
+              geometry.vertices.push( new THREE.Vector3(target_vertex[i][j][0],target_vertex[i][j][1],target_vertex[i][j][2]));
+            }
+          }
+        }
+
+    }
+    function random(){
+      for(i=0;i<79;i++){
+      geometry.vertices.push( new THREE.Vector3(getRandomInt(10),getRandomInt(5),0));
+      }
+    }
+
 
 
     let createShapes=function(){
-      // [[-147,-123,0],[-75,-165,0],[-102,-214,0]]
-      // [[31,88,0],[-48,-74,0],[-26,-143,0]]
-      // [[-210,-47,0],[-68,-125,0],[-92,-46,0]]
-      // [[-106,28,0],[-209,-39,0],[-95,-38,0]]
-      // [[-247,64,0],[-184,27,0],[-257,-20,0]]
 
-      let geometry = new THREE.Geometry();
-      //0
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      geometry.vertices.push( new THREE.Vector3(0,0,0));//-75,-165,0
-      geometry.vertices.push( new THREE.Vector3(0,0,0));//-102,-214,0
-      //1
-      geometry.vertices.push( new THREE.Vector3(0,0,0));//37,-88,0
-      geometry.vertices.push( new THREE.Vector3(-48,-74,0));
-      geometry.vertices.push( new THREE.Vector3(-26,-143,0));
-      //1
-      geometry.vertices.push( new THREE.Vector3(0,0,0));//-210,-47,0
-      geometry.vertices.push( new THREE.Vector3(-68,-125,0));
-      geometry.vertices.push( new THREE.Vector3(-92,-46,0));
-      //3
-      geometry.vertices.push( new THREE.Vector3(0,0,0));//-106,28,0
-      geometry.vertices.push( new THREE.Vector3(-209,-39,0));
-      geometry.vertices.push( new THREE.Vector3(-95,-38,0));
-      //4
-      geometry.vertices.push( new THREE.Vector3(0,0,0));//-247,64,0
-      geometry.vertices.push( new THREE.Vector3(-184,27,0));
-      geometry.vertices.push( new THREE.Vector3(-257,-20,0));
-
-      //5
-      //quadrilateral
-      //[28,65,0],[22,-56,0],[-87,-38,0],[-100,-31,0]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(28,65,0));
-      geometry.vertices.push( new THREE.Vector3(22,-56,0));
-      geometry.vertices.push( new THREE.Vector3(-87,-38,0));
-      // geometry.vertices.push( new THREE.Vector3(-100,-31,0));
-      //6
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(-87,-38,0));
-      geometry.vertices.push( new THREE.Vector3(28,65,0));
-      geometry.vertices.push( new THREE.Vector3(-100,31,0));
-      //
-      //[[57,215,0],[4,178,0],[-59,197,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(57,215,0));
-      geometry.vertices.push( new THREE.Vector3(4,178,0));
-      geometry.vertices.push( new THREE.Vector3(-59,197,0));
-
-      //quadrilateral1
-       // [[71,214,0],[9,172,0],[34,77,0],[91,133,0]]
-       geometry.vertices.push( new THREE.Vector3(0,0,0));
-       //geometry.vertices.push( new THREE.Vector3(71,214,0));
-       geometry.vertices.push( new THREE.Vector3(9,172,0));
-       geometry.vertices.push( new THREE.Vector3(34,77,0));
-
-       geometry.vertices.push( new THREE.Vector3(0,0,0));
-      // geometry.vertices.push( new THREE.Vector3(34,77,0));
-       geometry.vertices.push( new THREE.Vector3(91,133,0));
-       geometry.vertices.push( new THREE.Vector3(71,214,0));
-
-      //  [[81,213,0],[99,136,0],[204,159,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(81,213,0));
-      geometry.vertices.push( new THREE.Vector3(99,136,0));
-      geometry.vertices.push( new THREE.Vector3(204,159,0));
-      //quadrilateral3
-      // [[36,66,0],[104,39,0],[29,-57,0],[124,-30,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(36,66,0));
-      geometry.vertices.push( new THREE.Vector3(104,39,0));
-      geometry.vertices.push( new THREE.Vector3(29,-57,0));
-
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(104,39,0));
-      geometry.vertices.push( new THREE.Vector3(29,-57,0));
-      geometry.vertices.push( new THREE.Vector3(124,-30,0));
-
-
-      //quadrilateral4
-      //  [[110,39,0],[164,68,0],[130,-29,0],[260,-11,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(110,39,0));
-      geometry.vertices.push( new THREE.Vector3(164,68,0));
-      geometry.vertices.push( new THREE.Vector3(130,-29,0));
-
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(260,-11,0));
-      geometry.vertices.push( new THREE.Vector3(164,68,0));
-      geometry.vertices.push( new THREE.Vector3(130,-29,0));
-
-
-      //  [[176,67,0],[274,56,0],[267,-6,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //  geometry.vertices.push( new THREE.Vector3(176,67,0));
-      geometry.vertices.push( new THREE.Vector3(274,56,0));
-      geometry.vertices.push( new THREE.Vector3(267,-6,0));
-
-      // [[133,-370,0],[223,-71,0],[259,-20,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    // geometry.vertices.push( new THREE.Vector3(133,-37,0));
-      geometry.vertices.push( new THREE.Vector3(223,-71,0));
-      geometry.vertices.push( new THREE.Vector3(259,-20,0));
-
-      //quadrilateral5
-      // [[42,73,0],[107,44,0],[157,73,0],[97,128,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(38,73,0));
-      geometry.vertices.push( new THREE.Vector3(107,44,0));
-      geometry.vertices.push( new THREE.Vector3(157,73,0));
-
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-
-      //geometry.vertices.push( new THREE.Vector3(97,128,0));
-      geometry.vertices.push( new THREE.Vector3(38,73,0));
-      geometry.vertices.push( new THREE.Vector3(157,73,0));
-
-
-      // [[162,77,0],[210,152,0],[106,129,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(162,77,0));
-      geometry.vertices.push( new THREE.Vector3(210,152,0));
-      geometry.vertices.push( new THREE.Vector3(106,129,0));
-
-      //  [[218,149,0],[171,75,0],[267,63,0]],
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(218,149,0));
-      geometry.vertices.push( new THREE.Vector3(171,75,0));
-      geometry.vertices.push( new THREE.Vector3(267,63,0));
-      // [[17,70,0],[-95,42,0],[-73,111,0]],
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(17,70,0));
-      geometry.vertices.push( new THREE.Vector3(-95,42,0));
-      geometry.vertices.push( new THREE.Vector3(-73,111,0));
-      //quadrilateral6
-      // [[27,75,0],[1,172,0],[-75,193,0],[-72,119,0]],
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //geometry.vertices.push( new THREE.Vector3(27,75,0));
-      geometry.vertices.push( new THREE.Vector3(1,172,0));
-      geometry.vertices.push( new THREE.Vector3(-75,193,0));
-
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-    //  geometry.vertices.push( new THREE.Vector3(-72,119,0));
-      geometry.vertices.push( new THREE.Vector3(27,75,0));
-      geometry.vertices.push( new THREE.Vector3(-75,193,0));
-
-      // [[-107,38,0],[-83,112,0],[-200,86,0]],
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(-107,38,0));
-      geometry.vertices.push( new THREE.Vector3(-83,112,0));
-      geometry.vertices.push( new THREE.Vector3(-200,86,0));
-
-      //[[-85,190,0],[-82,120,0],[-192,97,0]]
-      geometry.vertices.push( new THREE.Vector3(0,0,0));
-      //geometry.vertices.push( new THREE.Vector3(-107,38,0));
-      geometry.vertices.push( new THREE.Vector3(-82,120,0));
-      geometry.vertices.push( new THREE.Vector3(-192,97,0));
+      //singlepoint();
+      //twopoint();
+      line();
+      //random();
 
       geometry.faces.push(new THREE.Face3(0,1,2));
       geometry.faces.push(new THREE.Face3(3,4,5));
@@ -245,41 +132,41 @@ target_vertex=[
         (new THREE.Color(1, 0, 0 ))];
 
 
-  geometry.faces[0].vertexColors=[(new THREE.Color(0xe1471d)),
-  (new THREE.Color(0xe1471d)),
-   (new THREE.Color(0xe1471d))];
+      geometry.faces[0].vertexColors=[(new THREE.Color(0xe1471d)),
+      (new THREE.Color(0xe1471d)),
+      (new THREE.Color(0xe1471d))];
 
-   geometry.faces[1].vertexColors=[(new THREE.Color(0xe1471d)),
-   (new THREE.Color(0xe1471d)),
-    (new THREE.Color(0xe1471d))];
+      geometry.faces[1].vertexColors=[(new THREE.Color(0xe1471d)),
+      (new THREE.Color(0xe1471d)),
+      (new THREE.Color(0xe1471d))];
 
-    geometry.faces[2].vertexColors=[(new THREE.Color(0xdf4621)),
-    (new THREE.Color(0xe4441a)),
-     (new THREE.Color(0xe4441a))];
+      geometry.faces[2].vertexColors=[(new THREE.Color(0xdf4621)),
+      (new THREE.Color(0xe4441a)),
+      (new THREE.Color(0xe4441a))];
 
-     geometry.faces[3].vertexColors=[(new THREE.Color(0xe46120)),
-     (new THREE.Color(0xe1461e)),
+      geometry.faces[3].vertexColors=[(new THREE.Color(0xe46120)),
+      (new THREE.Color(0xe1461e)),
       (new THREE.Color(0xe1461e))];
 
       geometry.faces[4].vertexColors=[(new THREE.Color(0xe46120)),
       (new THREE.Color(0xe1461e)),
-       (new THREE.Color(0xe1461e))];
+      (new THREE.Color(0xe1461e))];
 
-       geometry.faces[5].vertexColors=[(new THREE.Color(0xe89025)),
-       (new THREE.Color(0xe8631e)),
-        (new THREE.Color(0xe1461e))];
+      geometry.faces[5].vertexColors=[(new THREE.Color(0xe89025)),
+      (new THREE.Color(0xe8631e)),
+      (new THREE.Color(0xe1461e))];
 
-        geometry.faces[6].vertexColors=[(new THREE.Color(0xe1461e)),
-        (new THREE.Color(0xe89025)),
-         (new THREE.Color(0xe3631a))];
+      geometry.faces[6].vertexColors=[(new THREE.Color(0xe1461e)),
+      (new THREE.Color(0xe89025)),
+      (new THREE.Color(0xe3631a))];
 
-         geometry.faces[7].vertexColors=[(new THREE.Color(0xe6ba06)),
-         (new THREE.Color(0xeda114)),
-          (new THREE.Color(0xe99908))];
+      geometry.faces[7].vertexColors=[(new THREE.Color(0xe6ba06)),
+      (new THREE.Color(0xeda114)),
+      (new THREE.Color(0xe99908))];
 
-          geometry.faces[8].vertexColors=[(new THREE.Color(0xe6ba06)),
-          (new THREE.Color(0xf09906)),
-           (new THREE.Color(0xf08e10))];
+      geometry.faces[8].vertexColors=[(new THREE.Color(0xe6ba06)),
+      (new THREE.Color(0xf09906)),
+      (new THREE.Color(0xf08e10))];
 
 
       geometry.faces[9].vertexColors=[(new THREE.Color(0xf08e10)),
@@ -350,34 +237,14 @@ target_vertex=[
       geometry.faces[25].vertexColors=[(new THREE.Color(0xe99015)),
       (new THREE.Color(0xe48317)),
       (new THREE.Color(0xee6e15))];
-//    geometry.faces.forEach((face, ndx) => {
-//    face.vertexColors = [
-//    (new THREE.Color()).setHSL(3/ 12      , 1, 0.5),
-//    (new THREE.Color()).setHSL(3 / 12 + 0.1, 1, 0.5),
-//    (new THREE.Color()).setHSL(3 / 12 + 0.2, 1, 0.5),
-//    ];
-// });
+
       let material = new THREE.MeshBasicMaterial({vertexColors: THREE.VertexColors,
          side: THREE.DoubleSide,wireframe:true});
 
       triangle1 = new THREE.Mesh( geometry, material);
       scene.add(triangle1)
-      console.log(target_vertex[0][0][0]);
-      console.log(target_vertex[0][0][1]);
 
-      console.log(target_vertex[1][0][0]);
-      console.log(target_vertex[1][0][1]);
-
-      console.log(target_vertex[2][0][0]);
-      console.log(target_vertex[2][0][1]);
-
-      console.log(target_vertex[3][0][0]);
-      console.log(target_vertex[3][0][1]);
-
-      console.log(target_vertex[4][0][0]);
-      console.log(target_vertex[4][0][1]);
     }
-
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -411,229 +278,43 @@ target_vertex=[
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
-
       // triangle1.faces[0].position.x+=10;
-
-     // triangle1.rotation.z+=0.02;
+      // triangle1.rotation.z+=0.02;
      // triangle1.rotation.y+=0.02;
      // triangle1.position.x+=3*Math.sin(theta);
-       triangle1.position.z+=0.3*Math.cos(theta);
-       theta+=0.02;
+       triangle1.position.z+=0.7*Math.cos(theta);
+       theta+=0.04;
       triangle1.geometry.verticesNeedUpdate=true;
 
-         if (triangle1.geometry.vertices[0].x!=target_vertex[0][0][0]){
-           triangle1.geometry.vertices[0].x-=1;
-         }
-         if (triangle1.geometry.vertices[0].y!=target_vertex[0][0][1]){
-           triangle1.geometry.vertices[0].y-=1;
-         }
 
-         if (triangle1.geometry.vertices[1].x!=target_vertex[0][1][0]){
-           triangle1.geometry.vertices[1].x-=1;
-         }
-         if (triangle1.geometry.vertices[1].y!=target_vertex[0][1][1]){
-           triangle1.geometry.vertices[1].y-=1;
-         }
 
-         if (triangle1.geometry.vertices[2].x!=target_vertex[0][2][0]){
-           triangle1.geometry.vertices[2].x-=1;
+       for(i=0;i<78;i++){
+         if (triangle1.geometry.vertices[i].x!=target_vertex[Math.floor(i/3)][i%3][0]){
+           if(target_vertex[Math.floor(i/3)][i%3][0]<0){
+             triangle1.geometry.vertices[i].x-=1;}
+             else{
+               triangle1.geometry.vertices[i].x+=1;
+             }
          }
-         if (triangle1.geometry.vertices[2].y!=target_vertex[0][2][1]){
-           triangle1.geometry.vertices[2].y-=1;
+         if (triangle1.geometry.vertices[i].y!=target_vertex[Math.floor(i/3)][i%3][1]){
+           if(target_vertex[Math.floor(i/3)][i%3][1]<0){
+             triangle1.geometry.vertices[i].y-=1;}
+             else{
+               triangle1.geometry.vertices[i].y+=1;
+             }
          }
 
-
-
-         if (triangle1.geometry.vertices[3].x!=target_vertex[1][0][0]){
-          triangle1.geometry.vertices[3].x+=1;
-        }
-          if (triangle1.geometry.vertices[3].y!=target_vertex[1][0][1]){
-          triangle1.geometry.vertices[3].y-=1;
-        }
-
-        //3 and 4
-        if (triangle1.geometry.vertices[6].x!=target_vertex[2][0][0]){
-          triangle1.geometry.vertices[6].x-=1;
-        }
-        if (triangle1.geometry.vertices[6].y!=target_vertex[2][0][1]){
-          triangle1.geometry.vertices[6].y-=1;
-        }
-
-        if (triangle1.geometry.vertices[9].x!=target_vertex[3][0][0]){
-         triangle1.geometry.vertices[9].x-=1;
-       }
-         if (triangle1.geometry.vertices[9].y!=target_vertex[3][0][1]){
-         triangle1.geometry.vertices[9].y+=1;
        }
 
-       //5
-       if (triangle1.geometry.vertices[12].x!=target_vertex[4][0][0]){
-        triangle1.geometry.vertices[12].x-=1;
-      }
-        if (triangle1.geometry.vertices[12].y!=target_vertex[4][0][1]){
-        triangle1.geometry.vertices[12].y+=1;
-      }
-
-      //6
-      //5
-      if (triangle1.geometry.vertices[15].x!=target_vertex[5][0][0]){
-       triangle1.geometry.vertices[15].x+=1;
-     }
-       if (triangle1.geometry.vertices[15].y!=target_vertex[5][0][1]){
-       triangle1.geometry.vertices[15].y+=1;
-     }
-
-     if (triangle1.geometry.vertices[18].x!=target_vertex[6][0][0]){
-      triangle1.geometry.vertices[18].x-=1;
-    }
-      if (triangle1.geometry.vertices[18].y!=target_vertex[6][0][1]){
-      triangle1.geometry.vertices[18].y-=1;
-    }
-
-    if (triangle1.geometry.vertices[21].x!=target_vertex[7][0][0]){
-     triangle1.geometry.vertices[21].x+=1;
-    }
-     if (triangle1.geometry.vertices[21].y!=target_vertex[7][0][1]){
-     triangle1.geometry.vertices[21].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[24].x!=target_vertex[8][0][0]){
-     triangle1.geometry.vertices[24].x+=1;
-    }
-     if (triangle1.geometry.vertices[24].y!=target_vertex[8][0][1]){
-     triangle1.geometry.vertices[24].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[27].x!=target_vertex[9][0][0]){
-     triangle1.geometry.vertices[27].x+=1;
-    }
-     if (triangle1.geometry.vertices[27].y!=target_vertex[9][0][1]){
-     triangle1.geometry.vertices[27].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[30].x!=target_vertex[10][0][0]){
-     triangle1.geometry.vertices[30].x+=1;
-    }
-     if (triangle1.geometry.vertices[30].y!=target_vertex[10][0][1]){
-     triangle1.geometry.vertices[30].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[33].x!=target_vertex[11][0][0]){
-     triangle1.geometry.vertices[33].x+=1;
-    }
-     if (triangle1.geometry.vertices[33].y!=target_vertex[11][0][1]){
-     triangle1.geometry.vertices[33].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[36].x!=target_vertex[12][0][0]){
-     triangle1.geometry.vertices[36].x+=1;
-    }
-     if (triangle1.geometry.vertices[36].y!=target_vertex[12][0][1]){
-     triangle1.geometry.vertices[36].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[39].x!=target_vertex[13][0][0]){
-     triangle1.geometry.vertices[39].x+=1;
-    }
-     if (triangle1.geometry.vertices[39].y!=target_vertex[13][0][1]){
-     triangle1.geometry.vertices[39].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[42].x!=target_vertex[14][0][0]){
-     triangle1.geometry.vertices[42].x+=1;
-    }
-     if (triangle1.geometry.vertices[42].y!=target_vertex[14][0][1]){
-     triangle1.geometry.vertices[42].y-=1;
-    }
-
-    if (triangle1.geometry.vertices[45].x!=target_vertex[15][0][0]){
-     triangle1.geometry.vertices[45].x+=1;
-    }
-     if (triangle1.geometry.vertices[45].y!=target_vertex[15][0][1]){
-     triangle1.geometry.vertices[45].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[48].x!=target_vertex[16][0][0]){
-     triangle1.geometry.vertices[48].x+=1;
-    }
-     if (triangle1.geometry.vertices[48].y!=target_vertex[16][0][1]){
-     triangle1.geometry.vertices[48].y-=1;
-    }
-
-    if (triangle1.geometry.vertices[51].x!=target_vertex[17][0][0]){
-     triangle1.geometry.vertices[51].x+=1;
-    }
-     if (triangle1.geometry.vertices[51].y!=target_vertex[17][0][1]){
-     triangle1.geometry.vertices[51].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[54].x!=target_vertex[18][0][0]){
-     triangle1.geometry.vertices[54].x+=1;
-    }
-     if (triangle1.geometry.vertices[54].y!=target_vertex[18][0][1]){
-     triangle1.geometry.vertices[54].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[57].x!=target_vertex[19][0][0]){
-     triangle1.geometry.vertices[57].x+=1;
-    }
-     if (triangle1.geometry.vertices[57].y!=target_vertex[19][0][1]){
-     triangle1.geometry.vertices[57].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[60].x!=target_vertex[20][0][0]){
-     triangle1.geometry.vertices[60].x+=1;
-    }
-     if (triangle1.geometry.vertices[60].y!=target_vertex[20][0][1]){
-     triangle1.geometry.vertices[60].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[63].x!=target_vertex[21][0][0]){
-     triangle1.geometry.vertices[63].x+=1;
-    }
-     if (triangle1.geometry.vertices[63].y!=target_vertex[21][0][1]){
-     triangle1.geometry.vertices[63].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[66].x!=target_vertex[22][0][0]){
-     triangle1.geometry.vertices[66].x+=1;
-    }
-     if (triangle1.geometry.vertices[66].y!=target_vertex[22][0][1]){
-     triangle1.geometry.vertices[66].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[69].x!=target_vertex[23][0][0]){
-     triangle1.geometry.vertices[69].x-=1;
-    }
-     if (triangle1.geometry.vertices[69].y!=target_vertex[23][0][1]){
-     triangle1.geometry.vertices[69].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[72].x!=target_vertex[24][0][0]){
-     triangle1.geometry.vertices[72].x-=1;
-    }
-     if (triangle1.geometry.vertices[72].y!=target_vertex[24][0][1]){
-     triangle1.geometry.vertices[72].y+=1;
-    }
-
-    if (triangle1.geometry.vertices[75].x!=target_vertex[25][0][0]){
-     triangle1.geometry.vertices[75].x-=1;
-    }
-     if (triangle1.geometry.vertices[75].y!=target_vertex[25][0][1]){
-     triangle1.geometry.vertices[75].y+=1;
-    }
 
     if (triangle1.geometry.vertices[42].x==target_vertex[14][0][0] && triangle1.geometry.vertices[42].y==target_vertex[14][0][1]){
      triangle1.material.wireframe=false;
     }
-
-
-
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };
 
-    ///////////////////////////////////////////////
+
     init();
     mainLoop();
 </script>
